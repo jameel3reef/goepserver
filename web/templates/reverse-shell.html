@@ -1,0 +1,109 @@
+{{define "title"}}Reverse Shell Generator - GoEPServer{{end}}
+
+{{define "content"}}
+    <div class="reverse-shell-container">
+        <h1><i class="fas fa-terminal"></i> Reverse Shell Generator</h1>
+        
+        <div class="shell-config">
+            <div class="config-row">
+                <div class="config-group">
+                    <label for="ip-input">IP Address:</label>
+                    <input type="text" id="ip-input" value="{{.ServerIP}}" placeholder="127.0.0.1">
+                </div>
+                <div class="config-group">
+                    <label for="port-input">Port:</label>
+                    <input type="number" id="port-input" value="4444" placeholder="4444">
+                </div>
+                <div class="config-group">
+                    <label for="shell-select">Shell:</label>
+                    <select id="shell-select">
+                        <option value="/bin/bash">/bin/bash</option>
+                        <option value="/bin/sh">/bin/sh</option>
+                        <option value="/bin/zsh">/bin/zsh</option>
+                        <option value="cmd">cmd</option>
+                        <option value="powershell">powershell</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="encoding-options">
+                <label><input type="radio" name="encoding" value="none" checked> None</label>
+                <label><input type="radio" name="encoding" value="url"> URL Encode</label>
+                <label><input type="radio" name="encoding" value="base64"> Base64 Encode</label>
+            </div>
+        </div>
+        
+        <div class="shell-tabs">
+            <button class="tab-button active" data-tab="reverse">Reverse Shell</button>
+            <button class="tab-button" data-tab="bind">Bind Shell</button>
+            <button class="tab-button" data-tab="msfvenom">MSFVenom</button>
+            <button class="tab-button" data-tab="hoaxshell">HoaxShell</button>
+        </div>
+        
+        <div class="os-filter">
+            <button class="active" data-os="all">All</button>
+            <button data-os="linux">Linux</button>
+            <button data-os="windows">Windows</button>
+            <button data-os="mac">Mac</button>
+        </div>
+        
+        <input type="text" class="search-box" id="search-box" placeholder="Search shells...">
+        
+        <div id="reverse-content" class="shell-content active">
+            <div class="shell-list" id="reverse-shell-list">
+                <!-- Reverse shells will be populated here -->
+            </div>
+        </div>
+        
+        <div id="bind-content" class="shell-content">
+            <div class="shell-list" id="bind-shell-list">
+                <!-- Bind shells will be populated here -->
+            </div>
+        </div>
+        
+        <div id="msfvenom-content" class="shell-content">
+            <div class="shell-list" id="msfvenom-list">
+                <!-- MSFVenom payloads will be populated here -->
+            </div>
+        </div>
+        
+        <div id="hoaxshell-content" class="shell-content">
+            <div class="shell-list" id="hoaxshell-list">
+                <!-- HoaxShell payloads will be populated here -->
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "scripts"}}
+    <!-- Additional CSS for Prism.js dark mode compatibility -->
+    <style>
+        /* Ensure Prism.js works well in both light and dark modes */
+        body.dark-mode pre[class*="language-"],
+        html[data-theme="dark"] pre[class*="language-"] {
+            background: rgba(0, 0, 0, 0.4) !important;
+            color: #f8f8f2 !important;
+        }
+        
+        body.dark-mode code[class*="language-"],
+        html[data-theme="dark"] code[class*="language-"] {
+            background: transparent !important;
+            color: #f8f8f2 !important;
+        }
+        
+        /* Light mode overrides */
+        body:not(.dark-mode) pre[class*="language-"],
+        html[data-theme="light"] pre[class*="language-"] {
+            background: rgba(0, 0, 0, 0.8) !important;
+            color: #f8f8f2 !important;
+        }
+        
+        body:not(.dark-mode) code[class*="language-"],
+        html[data-theme="light"] code[class*="language-"] {
+            background: transparent !important;
+            color: #f8f8f2 !important;
+        }
+    </style>
+    
+    <script src="/static/js/reverse-shell.js"></script>
+{{end}}

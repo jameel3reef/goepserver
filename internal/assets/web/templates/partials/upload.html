@@ -1,0 +1,62 @@
+{{define "upload-modal"}}
+<div class="modal" id="upload-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Upload File</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="dropzone" id="dropzone">
+                <i class="fas fa-cloud-upload-alt dropzone-icon"></i>
+                <p>Drag & drop files here<br>or</p>
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="file-upload" class="file-input-label">
+                            <i class="fas fa-file-upload"></i> Choose File
+                        </label>
+                        <input type="file" id="file-upload" name="f" class="file-input" required>
+                    </div>
+                    <button type="submit" class="btn primary">Upload</button>
+                </form>
+                <div class="selected-file" id="selected-file"></div>
+            </div>
+            
+            <div class="upload-instructions">
+                <h4>Or use command line:</h4>
+                
+                <div class="tabs">
+                    <div class="tab-header">
+                        <button class="tab-btn active" data-target="linux-tab">Linux</button>
+                        <button class="tab-btn" data-target="windows-tab">Windows</button>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="linux-tab">
+                            <div class="code-block">
+                                <pre><code class="language-bash" id="curl-command-linux"></code></pre>
+                                <button class="copy-code" onclick="copyCurlCommand('linux')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="windows-tab">
+                            <div class="code-block">
+                                <pre><code class="language-bash" id="curl-command-windows"></code></pre>
+                                <button class="copy-code" onclick="copyCurlCommand('windows')">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <p class="windows-note">For PowerShell:</p>
+                            <div class="code-block">
+                                <pre><code class="language-powershell" id="powershell-command"></code></pre>
+                                <button class="copy-code" onclick="copyPowerShellCommand()">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

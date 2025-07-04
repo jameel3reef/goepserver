@@ -1,0 +1,37 @@
+{{define "navbar"}}
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" style="color: white; text-decoration: none;">
+                <i class="fas fa-server"></i> GoEPServer
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <a href="/" class="navbar-item {{if eq .ActivePage "home"}}active{{end}}">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="/expy" class="navbar-item {{if eq .ActivePage "expy"}}active{{end}}">
+                <i class="fas fa-file-code"></i> ExPy Tool
+            </a>
+            <a href="/reverse-shell" class="navbar-item {{if eq .ActivePage "reverse-shell"}}active{{end}}">
+                <i class="fas fa-terminal"></i> Reverse Shell
+            </a>
+            <a href="/uploaded_files" class="navbar-item {{if eq .ActivePage "uploads"}}active{{end}}">
+                <i class="fas fa-file-upload"></i> Uploaded Files
+            </a>
+            <a href="#" class="navbar-item" id="upload-btn">
+                <i class="fas fa-cloud-upload-alt"></i> Upload File
+            </a>
+            <div class="theme-toggle">
+                <label class="switch" aria-label="Toggle dark mode">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round">
+                        <i class="fas fa-sun sun-icon"></i>
+                        <i class="fas fa-moon moon-icon"></i>
+                    </span>
+                </label>
+            </div>
+        </div>
+    </div>
+</nav>
+{{end}}

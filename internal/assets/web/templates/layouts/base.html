@@ -1,0 +1,65 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add color-scheme meta tag for system UI elements -->
+    <meta name="color-scheme" content="light dark">
+    <!-- Prevent flash of light theme when dark mode is enabled -->
+    <script>
+        // This script prevents the flash of light theme when dark mode is enabled
+        (function() {
+            // Check localStorage for saved theme
+            const savedTheme = localStorage.getItem('theme');
+            
+            // Check system preference if no saved theme
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Apply dark mode immediately if needed
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.classList.add('dark-mode');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+    <title>{{block "title" .}}GoEPServer{{end}}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/dark-mode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    {{block "headExtra" .}}{{end}}
+</head>
+<body>
+    {{template "navbar" .}}
+
+    <main class="container">
+        {{block "content" .}}{{end}}
+    </main>
+
+    {{template "upload-modal" .}}
+
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span>Link copied to clipboard!</span>
+        </div>
+    </div>
+
+    {{block "modals" .}}{{end}}
+
+    {{template "footer" .}}
+
+    <!-- Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/dark-mode.js"></script>
+    {{block "scripts" .}}{{end}}
+</body>
+</html>
+{{end}}

@@ -1,0 +1,163 @@
+{{define "title"}}GoEPServer - ExPy Tool{{end}}
+{{define "content"}}
+<div class="hero">
+    <h1>ExPy - Malicious File Generator</h1>
+    <p>Generate various file types for penetration testing</p>
+</div>
+
+<!-- Generator Section -->
+<div class="section">
+    <div class="section-header">
+        <h2><i class="fas fa-code"></i> Generate Files</h2>
+    </div>
+    <div class="card full-width">
+        <div class="card-body">
+            <form id="expy-form" class="expy-form">
+                <!-- Step 1: Payload Type -->
+                <div class="form-group">
+                    <label for="payload-type">Payload Type:</label>
+                    <select id="payload-type" name="payload_type" class="form-control" required>
+                        <option value="" selected disabled>Select payload type</option>
+                        <option value="reverse_shell">Reverse Shell</option>
+                        <option value="execute_command">Execute Command</option>
+                    </select>
+                </div>
+
+                <div id="payload-description" class="form-description">
+                    <p class="description-text">Select a payload type to continue.</p>
+                </div>
+                
+                <!-- Step 2: File Type (Initially hidden) -->
+                <div class="form-group" id="file-type-group" style="display: none;">
+                    <label for="file-type">File Type:</label>
+                    <select id="file-type" name="type" class="form-control" required>
+                        <option value="" selected disabled>Select file type</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+
+                <div id="file-description" class="form-description" style="display: none;">
+                    <!-- File type description will be shown here -->
+                </div>
+                
+                <!-- Step 3: File Name (Initially hidden) -->
+                <div class="form-group" id="filename-group" style="display: none;">
+                    <label for="filename">File Name:</label>
+                    <input type="text" id="filename" name="name" class="form-control" required placeholder="Enter file name (without extension)">
+                </div>
+                
+                <!-- Reverse Shell Parameters (Initially hidden) -->
+                <div id="reverse-shell-params" style="display: none;">
+                    <div class="form-group">
+                        <label for="listener-ip">Listener IP:</label>
+                        <input type="text" id="listener-ip" name="listener_ip" class="form-control" required placeholder="Enter your listener IP address">
+                    </div>
+                    
+                    <div class="form-group" id="port-group">
+                        <label for="listener-port">Listener Port:</label>
+                        <input type="number" id="listener-port" name="listener_port" class="form-control" required placeholder="Enter your listener port">
+                    </div>
+                </div>
+                
+                <!-- Execute Command Parameters (Initially hidden) -->
+                <div id="execute-command-params" style="display: none;">
+                    <div class="form-group">
+                        <label for="command">Command to Execute:</label>
+                        <textarea id="command" name="command" class="form-control" rows="3" required placeholder="Enter the command to execute (e.g., calc.exe)"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">Generate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Result Section -->
+<div class="section" id="result-section" style="display: none;">
+    <div class="card full-width">
+        <div class="card-header primary">
+            <h3>Generated File</h3>
+        </div>
+        <div class="card-body">
+            <div id="result-content">
+                <!-- Result will be shown here -->
+            </div>
+            <div class="form-actions">
+                <div class="button-group">
+                    <button id="download-btn" class="btn download">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button id="copy-link-btn" class="btn secondary">
+                        <i class="fas fa-link"></i> Copy Link
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Previously Generated Files Section -->
+<div class="section">
+    <div class="section-header">
+        <h2><i class="fas fa-history"></i> Previously Generated Files</h2>
+    </div>
+    <div class="card full-width">
+        <div id="expy-files-container">
+            <!-- Files will be loaded by JavaScript -->
+            <div class="card-body empty-state">
+                <i class="fas fa-spinner fa-spin empty-icon"></i>
+                <h3>Loading files...</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "modals"}}
+<!-- Tool Upload Confirmation Modal -->
+<div class="modal" id="tool-confirmation-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Confirm Overwrite</h3>
+            <span class="close-modal" onclick="closeConfirmationModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>A tool with this name already exists. Do you want to replace it?</p>
+            <p id="confirmation-filename" class="filename"></p>
+            <div class="modal-actions">
+                <button class="btn primary" onclick="closeConfirmationModal()">Cancel</button>
+                <button class="btn warning" id="confirm-upload-btn">Replace</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ExPy File Delete Confirmation Modal -->
+<div class="modal" id="expy-file-delete-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Confirm Delete</h3>
+            <span class="close-modal" onclick="closeExpyFileDeleteModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete this file?</p>
+            <p id="expy-file-delete-name" class="filename"></p>
+            <div class="modal-actions">
+                <button class="btn primary" onclick="closeExpyFileDeleteModal()">Cancel</button>
+                <button class="btn delete" id="confirm-expy-file-delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "scripts"}}
+<script src="/static/js/expy.js"></script>
+{{end}}
+
+{{define "headExtra"}}
+
+{{end}}

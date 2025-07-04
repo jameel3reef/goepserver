@@ -1,0 +1,384 @@
+/* CSS variables based on HTML data-theme attribute */
+:root, html[data-theme="light"] {
+    /* Light theme variables (default) */
+    --primary-color: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary-color: #16db93;
+    --warning-color: #f08700;
+    --danger-color: #ef476f;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --gray-color: #6c757d;
+    --background-color: #f4f8fb;
+    --card-bg-color: #ffffff;
+    --text-color: #212529;
+    --border-color: #dee2e6;
+    --enumeration-color: #3a0ca3;
+    --attacking-color: #e63946;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --code-bg-color: #212121;
+    --code-text-color: #f8f8f2;
+    --input-bg: #ffffff;
+    --input-text: #212529;
+    --input-border: #ced4da;
+    --input-focus-bg: #ffffff;
+    --input-focus-border: #4361ee;
+    --toast-bg: #16db93;
+    --toast-text: #ffffff;
+    --modal-bg: #ffffff;
+    --modal-border: #dee2e6;
+    --dropzone-bg: rgba(67, 97, 238, 0.05);
+    --dropzone-border: #4361ee;
+    --footer-bg: #ffffff;
+    --table-hover-bg: #f8f9fa;
+}
+
+/* Dark theme variables */
+html[data-theme="dark"], body.dark-mode {
+    --primary-color: #6e7ff3;
+    --primary-dark: #5a6bea;
+    --secondary-color: #26f0aa;
+    --warning-color: #ffad42;
+    --danger-color: #ff6b8b;
+    --light-color: #343a40;
+    --dark-color: #f8f9fa;
+    --gray-color: #adb5bd;
+    --background-color: #121212;
+    --card-bg-color: #1e1e1e;
+    --text-color: #e9ecef;
+    --border-color: #444444;
+    --enumeration-color: #9061ed;
+    --attacking-color: #ff6b6b;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --code-bg-color: #2f2f2f;
+    --code-text-color: #f8f8f2;
+    --input-bg: #2a2a2a;
+    --input-text: #e9ecef;
+    --input-border: #444444;
+    --input-focus-bg: #333333;
+    --input-focus-border: #6e7ff3;
+    --toast-bg: #26f0aa;
+    --toast-text: #121212;
+    --modal-bg: #1e1e1e;
+    --modal-border: #444444;
+    --dropzone-bg: rgba(110, 127, 243, 0.1);
+    --dropzone-border: #6e7ff3;
+    --footer-bg: #1a1a1a;
+    --table-hover-bg: #2a2a2a;
+}
+
+/* Support for system preference via media query */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) {
+        --primary-color: #6e7ff3;
+        --primary-dark: #5a6bea;
+        --secondary-color: #26f0aa;
+        --warning-color: #ffad42;
+        --danger-color: #ff6b8b;
+        --light-color: #343a40;
+        --dark-color: #f8f9fa;
+        --gray-color: #adb5bd;
+        --background-color: #121212;
+        --card-bg-color: #1e1e1e;
+        --text-color: #e9ecef;
+        --border-color: #444444;
+        --enumeration-color: #9061ed;
+        --attacking-color: #ff6b6b;
+        --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        --code-bg-color: #2f2f2f;
+        --code-text-color: #f8f8f2;
+        --input-bg: #2a2a2a;
+        --input-text: #e9ecef;
+        --input-border: #444444;
+        --input-focus-bg: #333333;
+        --input-focus-border: #6e7ff3;
+        --toast-bg: #26f0aa;
+        --toast-text: #121212;
+        --modal-bg: #1e1e1e;
+        --modal-border: #444444;
+        --dropzone-bg: rgba(110, 127, 243, 0.1);
+        --dropzone-border: #6e7ff3;
+        --footer-bg: #1a1a1a;
+        --table-hover-bg: #2a2a2a;
+    }
+}
+
+/* Dark theme root element styling */
+html[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+/* Apply transition to all elements for smooth theme switching
+   Note: We exclude transitions on initial page load */
+.transition-colors * {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Add a script-based class to enable transitions after page load */
+
+/* Base elements */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--primary-color);
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-bg-color);
+    box-shadow: var(--card-shadow);
+}
+
+/* Form elements */
+input, select, textarea, .form-control {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+}
+
+input:focus, select:focus, textarea:focus, .form-control:focus {
+    background-color: var(--input-focus-bg);
+    border-color: var(--input-focus-border);
+    color: var(--input-text);
+}
+
+/* Buttons */
+.btn {
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* Code blocks */
+.code-block {
+    background-color: var(--code-bg-color);
+    color: var(--code-text-color);
+}
+
+/* Tables */
+.table th {
+    background-color: var(--primary-color);
+}
+
+.table td, .table th {
+    border-color: var(--border-color);
+}
+
+.table tr:hover {
+    background-color: var(--table-hover-bg);
+}
+
+/* Theme Toggle Switch */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: -1px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--primary-color);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 2;
+}
+
+/* Disable transitions during initialization */
+.slider.no-transition:before {
+    transition: none !important;
+}
+
+.slider.no-transition {
+    transition: none !important;
+}
+
+/* Icons inside the slider */
+.slider .sun-icon,
+.slider .moon-icon {
+    color: var(--primary-color);
+    font-size: 14px;
+    transition: opacity 0.3s;
+    z-index: 1;
+}
+
+.slider .sun-icon {
+    margin-left: 4px;
+}
+
+.slider .moon-icon {
+    margin-right: 4px;
+}
+
+/* Default state (light mode) */
+.slider .sun-icon {
+    opacity: 0;
+}
+
+.slider .moon-icon {
+    opacity: 1;
+}
+
+/* When toggled (dark mode) */
+input:checked + .slider {
+    background-color: #121212;
+}
+
+input:checked + .slider:before {
+    transform: translateX(28px);
+    background-color: #f1f1f1;
+}
+
+input:checked + .slider .sun-icon {
+    opacity: 1;
+}
+
+input:checked + .slider .moon-icon {
+    opacity: 0;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Add a subtle glow effect to the active icon */
+input:checked + .slider .sun-icon {
+    color: #f1f1f1;
+    text-shadow: 0 0 5px rgba(255, 235, 59, 0.5);
+}
+
+.slider .moon-icon {
+    color: #3a56d4;
+    text-shadow: 0 0 5px rgba(58, 86, 212, 0.2);
+}
+
+/* Modal */
+.modal-content {
+    background-color: var(--modal-bg);
+    border-color: var(--modal-border);
+}
+
+.modal-header {
+    border-bottom-color: var(--border-color);
+}
+
+/* Toast */
+.toast {
+    background-color: var(--toast-bg);
+    color: var(--toast-text);
+}
+
+/* Dropzone */
+.tool-dropzone.dragover {
+    background-color: var(--dropzone-bg);
+    border-color: var(--dropzone-border);
+}
+
+/* Footer */
+footer {
+    background-color: var(--footer-bg);
+}
+
+/* File inputs and tooltips */
+.file-input-label {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Empty states */
+.empty-state {
+    color: var(--text-color);
+}
+
+.empty-icon {
+    color: var(--primary-color);
+}
+
+/* Description cards and informational elements */
+.form-description, .description-text {
+    background-color: var(--border-color);
+    padding: 0.5rem;
+    color: var(--gray-color);
+    border-radius: 0.25rem;
+    border-color: var(--border-color);
+}
+
+#result-section .form-actions{
+    background-color: var(--card-bg-color);
+    color: var(--gray-color);
+    border-color: var(--border-color);
+}
+
+.form-description {
+    background-color: var(--border-color);
+    color: var(--gray-color);
+    border-color: var(--border-color);
+}
+.description-card {
+    background-color: var(--card-bg-color);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Ensure high contrast for text */
+body.dark-mode .card-header h3,
+body.dark-mode .section-header h2 {
+    color: var(--text-color);
+}
+
+/* Selected file display dark mode styles */
+body.dark-mode .selected-file,
+html[data-theme="dark"] .selected-file {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-mode .selected-file.active,
+html[data-theme="dark"] .selected-file.active {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(110, 127, 243, 0.1);
+}
