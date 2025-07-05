@@ -76,7 +76,7 @@ cd goepserver
 
 ### Web Interface
 1. **Start the server**: `./goepserver`
-2. **Open browser**: Navigate to `http://localhost:8080`
+2. **Open browser**: Navigate to `http://localhost:80`
 3. **Upload files**: Use the web interface or drag & drop
 4. **Generate shells**: Visit `/reverse-shell` for the payload generator
 5. **Theme toggle**: Switch between light and dark modes
@@ -84,17 +84,17 @@ cd goepserver
 ### Command Line Upload
 ```bash
 # Linux/macOS
-curl http://localhost:8080/upload -F 'f=@yourfile.txt'
+curl http://localhost:80/upload -F 'f=@yourfile'
 
 # Windows PowerShell
-Invoke-RestMethod -Uri http://localhost:8080/upload -Method Post -Form @{f=Get-Item -Path "yourfile.txt"}
+Invoke-RestMethod -Uri http://localhost:80/upload -Method Post -Form @{f=Get-Item -Path "yourfile"}
 ```
 
 ### Command Line Options
 ```bash
 ./goepserver -h
 Usage:
-  -p int    Port number (default 8080)
+  -p int    Port number (default 80)
   -i string Interface to bind to (default "lo")
   -cli      Run in CLI mode
 ```
