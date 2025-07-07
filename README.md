@@ -28,6 +28,12 @@
 - **Expandable Cards**: Collapsible shell categories for better organization
 - **Real-time Updates**: Dynamic IP/port detection from browser location
 
+### 🖥️ **GoEPServer web Interface**
+
+![GoEPServer web Interface](https://i.postimg.cc/bJ4sCnY7/image.png)
+### 🖥️ **GoEPServer CLI Interface**
+
+![GoEPServer CLI Interface](https://i.postimg.cc/nLyChZ4B/image.png)
 ### 📦 **Deployment**
 - **Standalone Binary**: All web assets embedded, no external dependencies
 - **Cross-Platform**: Support for Linux, Windows, and macOS
